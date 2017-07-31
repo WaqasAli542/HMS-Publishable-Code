@@ -126,7 +126,7 @@ text-align:left;
                             <label class="control-label">Paid Amount</label>
                         </div>
                         <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" onchange="amountCheck()" id="amount" type="text" name="Reservation_Paid_Amount" required /> 
+                            <input class="col-xs-10 col-sm-5" onchange="amountCheck()" id="amount" type="number" min="0" step="1" name="Reservation_Paid_Amount" required /> 
                             <p class="col-xs-10 col-sm-5"><strong>Total:</strong>@c</p>
                             
                             <input type="hidden" id="total" value="@c"/>
@@ -140,7 +140,7 @@ text-align:left;
                             <label class="control-label">Payment Date</label>
                         </div>
                         <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" type="date" name="Reservation_Remainings" required />
+                            <input class="col-xs-10 col-sm-5" type="date" name="Reservation_Paid_Date" required />
                         </div>
                     </div>
                     <div class="form-group">
