@@ -1,0 +1,35 @@
+﻿@model Hotel_Management_System.Models.Reservation_Note
+
+@{
+    ViewBag.Title = "detailOfReservation_Note";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>detailOfReservation_Note</h2>
+
+<div>
+    <h4>Reservation_Note</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservation_Note_Des)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation_Note_Des)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservation.Reservation_members)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation.Reservation_members)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Reservation_Note_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

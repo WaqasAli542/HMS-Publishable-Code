@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Hotel_Management_System.Models.Department>
+
+@{
+    ViewBag.Title = "listOfDepartment";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>listOfDepartment</h2>
+
+<p>
+    @Html.ActionLink("Create New", "addDepartment")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.department_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.department_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "editDepartment", new { id=item.department_id }) |
+            @Html.ActionLink("Details", "detailOfDepartment", new { id=item.department_id }) |
+            @Html.ActionLink("Delete", "removeDepartment", new { id=item.department_id })
+        </td>
+    </tr>
+}
+
+</table>

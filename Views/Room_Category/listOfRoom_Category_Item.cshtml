@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Hotel_Management_System.Models.Room_Category_Item>
+
+@{
+    ViewBag.Title = "listOfRoom_Category_Item";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+@using Hotel_Management_System.Models
+<div class="page-content">
+    <h2>List Of Room Category Items</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "addRoom_Category_Item")
+    </p>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Item Name
+                </th>
+                <th>
+                    Item Quantity
+                </th>
+                <th>
+                    Item Price
+                </th>
+                <th>
+                    Room Category
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Room_Category_Item item in Model)
+            {
+            <tr>
+                <td>
+                    @item.Item.Item_Name
+                </td>
+                <td>
+                    @item.Item_Quantity
+                </td>
+                <td>
+                    @item.RC_Item_Price
+                </td>
+                <td>
+                    @item.Room_Category.Category_Name
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "editRoom_Category_Item", new { id = item.RC_Item_Id }) |
+                    @Html.ActionLink("Details", "detailOfRoom_Category_Item", new { id = item.RC_Item_Id }) |
+                    @Html.ActionLink("Delete", "removeRoom_Category_Item", new { id = item.RC_Item_Id })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

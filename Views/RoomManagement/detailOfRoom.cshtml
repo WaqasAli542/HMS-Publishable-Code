@@ -1,0 +1,69 @@
+﻿@model Hotel_Management_System.Models.Room
+
+@{
+    ViewBag.Title = "detailOfRoom";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>detailOfRoom</h2>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_status)
+        </dd>
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.department_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.department_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Floor.Floor_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Floor.Floor_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_Category.Category_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_Category.Category_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "editRoom", new { id = Model.Room_id }) |
+    @Html.ActionLink("Back to List", "listOfRoom")
+</p>

@@ -1,0 +1,43 @@
+﻿@model Hotel_Management_System.Models.Item
+
+@{
+    ViewBag.Title = "detailOfItem";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>detailOfItem</h2>
+
+<div>
+    <h4>Item</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item_Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Item_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

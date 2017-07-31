@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Hotel_Management_System.Models.Floor>
+
+@{
+    ViewBag.Title = "listOfFloor";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>listOfFloor</h2>
+
+<p>
+    @Html.ActionLink("Create New", "addFloor")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Floor_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Floor_number)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Floor_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Floor_number)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "editFloor", new { id=item.Floor_id }) |
+            @Html.ActionLink("Details", "detailOfFloor", new { id=item.Floor_id }) |
+            @Html.ActionLink("Delete", "removeFloor", new { id=item.Floor_id })
+        </td>
+    </tr>
+}
+
+</table>

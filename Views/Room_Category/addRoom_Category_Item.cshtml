@@ -1,0 +1,113 @@
+﻿@model Hotel_Management_System.Models.Room_Category_Item
+
+@{
+    ViewBag.Title = "addRoom_Category_Item";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+@using Hotel_Management_System.Models;
+<div class="main-content-inner">
+    <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="#">Home</a>
+            </li>
+            <li class="active">Dashboard</li>
+        </ul><!-- /.breadcrumb -->
+
+    </div>
+    <div class="page-header">
+        <h1>
+            Room Category Item
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Add Room Category Items
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="page-content">
+        <div class="row">
+
+            @using (Html.BeginForm("addRoom_Category_Item", "Room_Category", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Room Category Item</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label  no-padding-right">Item Name</label>
+                        <div class="col-sm-9">
+                            <select onchange="getval(this)" class="col-xs-10 col-sm-5" required>
+                                @{
+                                    List<Item> list = ViewBag.Item_Id;
+                                    if (list.Count <= 0)
+                                    {
+
+                                    <option value="-1" disabled selected class="text-danger"> No item available</option>
+                                    }
+                                    else
+                                    {
+                                    <option selected disabled value="" class="active">Select an item</option>
+                                        foreach (var item in list)
+                                        {
+                                        <option value="@item.Item_Id,@item.Item_Price">@item.Item_Name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                            <input type="hidden" name="Item_Id" id="itemID"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Item_Quantity, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Item_Quantity, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5", required = "required",type="text" } })
+                            @Html.ValidationMessageFor(model => model.Item_Quantity, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-sm-offset-3 col-sm-9">
+                        <p class="text-danger">@ViewBag.Message</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label  no-padding-right">Item Price</label>
+                        <div class="col-sm-9">
+                            <input class = "col-xs-10 col-sm-5" type="text" id="price" name="RC_Item_Price"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Room_Category_Id, "Room_Category_Id", htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                        <div class="col-sm-9">
+                            @Html.DropDownList("Room_Category_Id", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Room_Category_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="submit">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "listOfRoom_Category_Item")
+            </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function getval(select) {
+            var a = select.value.split(",");
+            document.getElementById("itemID").value = a[0];
+            document.getElementById("price").value = a[1];
+        }
+    </script>

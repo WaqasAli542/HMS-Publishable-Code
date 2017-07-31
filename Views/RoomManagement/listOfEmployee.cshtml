@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Hotel_Management_System.Models.Employee>
+
+@{
+    ViewBag.Title = "listOfEmployee";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>listOfEmployee</h2>
+
+<p>
+    @Html.ActionLink("Create New", "addEmployee")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_cnic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_nationality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admin.Admin_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_cnic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_nationality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admin.Admin_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "editEmployee", new { id=item.Employee_id }) |
+            @Html.ActionLink("Details", "detailOfEmployee", new { id=item.Employee_id }) |
+            @Html.ActionLink("Delete", "removeEmployee", new { id=item.Employee_id })
+        </td>
+    </tr>
+}
+
+</table>

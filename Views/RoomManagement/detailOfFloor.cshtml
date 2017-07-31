@@ -1,0 +1,35 @@
+﻿@model Hotel_Management_System.Models.Floor
+
+@{
+    ViewBag.Title = "detailOfFloor";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>detailOfFloor</h2>
+
+<div>
+    <h4>Floor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Floor_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Floor_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Floor_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Floor_number)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   @*@Html.ActionLink("Edit", "Edit", new { id = Model.Floor_id })*@ 
+    @Html.ActionLink("Back to List", "listOfFloor")
+</p>

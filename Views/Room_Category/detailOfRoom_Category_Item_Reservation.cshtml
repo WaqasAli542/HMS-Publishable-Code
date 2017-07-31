@@ -1,0 +1,51 @@
+﻿@model Hotel_Management_System.Models.Room_Category_Item_Reservation
+
+@{
+    ViewBag.Title = "detailOfRoom_Category_Item_Reservation";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>detailOfRoom_Category_Item_Reservation</h2>
+
+<div>
+    <h4>Room_Category_Item_Reservation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RCI_Reservation_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RCI_Reservation_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RCI_Reservation_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RCI_Reservation_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservation.Reservation_members)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation.Reservation_members)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room_Category_Item.RC_Item_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_Category_Item.RC_Item_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RCI_Reservation_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

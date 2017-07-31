@@ -1,0 +1,124 @@
+﻿@model Hotel_Management_System.Models.Employee
+
+@{
+    ViewBag.Title = "addEmployee";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+<div class="main-content-inner">
+    <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="#">Home</a>
+            </li>
+            <li class="active">Dashboard</li>
+        </ul><!-- /.breadcrumb -->
+
+    </div>
+    <div class="page-header">
+        <h1>
+            Employee Management
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Add Employee and manage salaries
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+
+                @using (Html.BeginForm("addEmployee", "RoomManagement", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>Add Employee</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Employee_name, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Employee_name, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5" ,required="required"} })
+                                @Html.ValidationMessageFor(model => model.Employee_name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Employee_email, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Employee_email, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5" , required = "required" } })
+                                @Html.ValidationMessageFor(model => model.Employee_email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Employee_cnic, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Employee_cnic, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.Employee_cnic, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Employee_password, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Employee_password, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5", required = "required" ,type="password"} })
+                                @Html.ValidationMessageFor(model => model.Employee_password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Employee_city, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Employee_city, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.Employee_city, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Employee_country, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Employee_country, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.Employee_country, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Employee_nationality, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Employee_nationality, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.Employee_nationality, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Admin_id, "Admin_id", htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                            <div class="col-sm-9">
+                                @Html.DropDownList("Admin_id", null, htmlAttributes: new { @class = "col-xs-10 col-sm-5", required = "required" })
+                                @Html.ValidationMessageFor(model => model.Admin_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Submit
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "listOfEmployee")
+                </div>
+                </div>
+            </div>
+        </div>

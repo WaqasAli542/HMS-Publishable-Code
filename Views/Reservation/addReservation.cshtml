@@ -1,0 +1,284 @@
+﻿@model Hotel_Management_System.Models.Reservation
+
+@{
+    ViewBag.Title = "addReservation";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+@using Hotel_Management_System.Models;
+
+<div class="main-content-inner">
+    <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="#">Home</a>
+            </li>
+            <li class="active">Dashboard</li>
+        </ul><!-- /.breadcrumb -->
+
+    </div>
+    <div class="page-header">
+        <h1>
+            Reservation
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Add Reservations
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="page-content">
+        <h4>Reservation</h4>
+        <hr />
+    <div class="row">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-info" type="button"  data-toggle="modal" data-target="#myModal">
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                Add Customer
+            </button>
+        </div>
+        <!-- Add Customer Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form method="post" action="@Url.Action("addCustomer","Reservation")">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Customer</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-horizontal">
+                                <h4>Add Customer</h4>
+                                <hr />
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label  no-padding-right">Customer Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Customer_name" class="col-xs-10 col-sm-5" />
+                                        @{
+                                            Employee employee = ViewBag.employeeId;
+                                        }
+                                        <input type="hidden" name="Employee_id" value="@employee.Employee_id" />
+                                        <input type="hidden" class="col-xs-10 col-sm-5" type="text" name="Employee_id" value="@ViewBag.employeeName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label  no-padding-right">Customer Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Customer_email" class="col-xs-10 col-sm-5" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label  no-padding-right">Customer CNIC</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Customer_cnic" class="col-xs-10 col-sm-5" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label  no-padding-right">Customer City</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Customer_city" class="col-xs-10 col-sm-5" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label  no-padding-right">Customer Country</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Customer_country" class="col-xs-10 col-sm-5" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label  no-padding-right">Customer Nationality</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Customer_nationality" class="col-xs-10 col-sm-5" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label  no-padding-right">Customer Profession</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Customer_Profession" class="col-xs-10 col-sm-5" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="Submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+        <div class="row">
+
+            @using (Html.BeginForm("addReservation", "Reservation", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                   
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Customer_id, "Customer_id", htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                        <div class="col-sm-9">
+                            @{
+                                Customer customer = ViewBag.customerObject;
+                                if (customer == null)
+                                {
+                                <select name="Customer_id" class="col-xs-10 col-sm-5" required="required">
+                                    <option selected disabled value="" class="active"> Please Select A Customer</option>
+                                    @foreach (Customer cust in ViewBag.Customer_id)
+                                    {
+
+
+
+                                    <option value="@cust.Customer_id">@cust.Customer_name</option>
+
+
+
+                                    }
+                                </select>
+                                }
+                                else
+                                {
+                                <input type="hidden" name="Customer_id" value="@customer.Customer_id" />
+                                <input type="text" value="@customer.Customer_name" class="col-xs-10 col-sm-5" required />
+                                }
+                            }
+                            
+                             
+                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label  no-padding-right">Room No</label>
+                        <div class="col-sm-9">
+                            <select id="roomid" onchange="getval(this)" class="col-xs-10 col-sm-5" required="required">
+
+                                @{
+                                    List<Room> list = ViewBag.Room_id;
+                                    if (list.Count <= 0)
+                                    {
+
+                                    <option value="-1" disabled selected class="text-danger"> No room available</option>
+                                    }
+                                    else
+                                    {
+                                    <option selected disabled value="" class="active">Select a room number</option>
+
+                                        foreach (var item in list)
+                                        {
+                                        <option value="@item.Room_id,@item.Room_Rent">@item.Room_no</option>
+
+                                        }
+                                    }
+                                }
+
+
+                            </select>
+                            <input type="text" hidden id="Room_id" name="Room_id" class="col-xs-10 col-sm-5" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Reservation_from, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Reservation_from, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5", type = "date", required = "required",id="fromDate", onchange = "dateCheck()" } })
+                            @Html.ValidationMessageFor(model => model.Reservation_from, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Reservation_to, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Reservation_to, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5", type = "date", required = "required", onchange= "dateCheck();calculateDays();", id="toDate"} })
+                            @Html.ValidationMessageFor(model => model.Reservation_to, "", new { @class = "text-danger" })
+                            <p class="text-danger col-xs-10 col-sm-5" id="error"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Reservation_members, htmlAttributes: new { @class = "col-sm-3 control-label  no-padding-right" })
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Reservation_members, new { htmlAttributes = new { @class = "col-xs-10 col-sm-5", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Reservation_members, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label  no-padding-right">Room Rent</label>
+                        <div class="col-sm-9">
+                        <input type="hidden" id="roomRent" value=""/>
+                           <input type="text" id="rent" name="Room_Rent" class="col-xs-10 col-sm-5" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-sm-3 control-label  no-padding-right" for="form-field-8">Reservation Note</label>
+                        <div class="col-sm-9">
+                            <textarea class="col-xs-10 col-sm-5" name="Reservation_Note" id="form-field-8" placeholder="Note..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <input type="hidden" name="Reservation_Status" value="Active"/>
+                    </div>
+                    @if (list.Count > 0)
+                    {
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="submit" id="sub">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                    }
+                </div>
+                        
+                    }
+
+            <div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+<script type="text/javascript">
+        function getval(sel) {
+            var a= sel.value.split(",");
+            document.getElementById("Room_id").value = a[0];
+            document.getElementById("roomRent").value = a[1];
+           
+    }
+        function dateCheck() {
+            var to = document.getElementById("fromDate").value;
+            var toDate = new Date(to).getTime();
+            var from = document.getElementById("toDate").value;
+            var fromDate = new Date(from).getTime();
+            if (toDate == null || fromDate==null) {
+                document.getElementById("sub").removeAttribute("disabled", "disabled");
+                document.getElementById("error").innerHTML = " ";
+            }
+            else {
+                if (fromDate >= toDate) {
+                    document.getElementById("sub").removeAttribute("disabled", "disabled");
+                    document.getElementById("error").innerHTML = " ";
+                }
+                else {
+                    document.getElementById("sub").setAttribute("disabled", "disabled");
+                    document.getElementById("error").innerHTML = "Please enter valid date!";
+                }
+            }
+        }
+        function calculateDays() {
+            var a = document.getElementById("roomRent").value;
+            var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+            var firstDate = document.getElementById("fromDate").value;
+            var secondDate = document.getElementById("toDate").value;
+            var b = new Date(firstDate).getTime();
+            var c = new Date(secondDate).getTime();
+            var diffDays = Math.round(Math.abs((b - c) / (oneDay))) + 1;
+            var Days = a * diffDays;
+            document.getElementById("rent").value = Days;
+        }
+</script>

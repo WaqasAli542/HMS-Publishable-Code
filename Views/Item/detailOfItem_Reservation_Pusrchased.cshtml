@@ -1,0 +1,51 @@
+﻿@model Hotel_Management_System.Models.Item_Reservation_Purchased
+
+@{
+    ViewBag.Title = "detailOfItem_Reservation_Pusrchased";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>detailOfItem_Reservation_Pusrchased</h2>
+
+<div>
+    <h4>Item_Reservation_Purchased</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item_Res_Purchased_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item_Res_Purchased_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item_Res_Purchased_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item_Res_Purchased_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.Item_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.Item_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservation.Reservation_members)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation.Reservation_members)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Item_Res_Purchased_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

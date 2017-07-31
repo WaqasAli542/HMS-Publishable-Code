@@ -1,0 +1,221 @@
+﻿@model IEnumerable<Hotel_Management_System.Models.Reservation>
+
+@{
+    //List<Hotel_Management_System.Models.Reservation> temp = Model;
+
+    //temp[0].Room_Reservation.ToList()[0].Room.Room_no
+
+    //var temp3=temp.ToList().Select(x=>new Object(x.Reservation_to)
+
+    ViewBag.Title = "listOfReservation";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+@using Hotel_Management_System.Models;
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="header smaller lighter blue">List Of Reservations</h3>
+            <p>
+                @Html.ActionLink("Create New", "addReservation")
+            </p>
+            <div class="clearfix">
+                <div class="pull-right tableTools-container"></div>
+            </div>
+            <div class="table-header">
+                Results for "Latest Registered Customers"
+            </div>
+
+
+            <div>
+                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Customer.Customer_name)
+
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Reservation_from)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Reservation_to)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Reservation_members)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Reservation_Status)
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <b><a href="@Url.Action("detailOfReservation","Reservation",new { id = item.Reservation_id})">@item.Customer.Customer_name</a></b>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reservation_from)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reservation_to)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reservation_members)
+                </td>
+                <td class="hidden-480">
+                    @if (item.Reservation_Status == "Active")
+                {
+                <span class="badge badge-danger">@Html.DisplayFor(modelItem => item.Reservation_Status)</span>
+                    }
+                    else
+                    {
+                    <span class="badge badge-success">@Html.DisplayFor(modelItem => item.Reservation_Status)</span>
+                    }
+
+                </td>
+                <td>
+                    <div class="hidden-sm hidden-xs action-buttons">
+                        <a class="blue" href="#">
+                            <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                        </a>
+
+                        <a class="green" href="#">
+                            <i class="ace-icon fa fa-pencil bigger-130"></i>
+                        </a>
+
+                        <a class="red" href="#">
+                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                        </a>
+                    </div>
+
+                    <div class="hidden-md hidden-lg">
+                        <div class="inline pos-rel">
+                            <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                <li>
+                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                        <span class="blue">
+                                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                        <span class="green">
+                                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                        <span class="red">
+                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- basic scripts -->
+<!--[if !IE]> -->
+
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<!-- <![endif]-->
+<!--[if IE]>
+<script src="assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='~/Content/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+<script src="~/Content/assets/js/jquery-2.1.4.min.js"></script>
+<script src="~/Content/assets/js/bootstrap.min.js"></script>
+
+<script src="~/Content/assets/js/jquery-2.1.4.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="~/Content/assets/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/assets/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="~/Content/assets/js/dataTables.buttons.min.js"></script>
+<script src="~/Content/assets/js/buttons.flash.min.js"></script>
+<script src="~/Content/assets/js/buttons.html5.min.js"></script>
+<script src="~/Content/assets/js/buttons.print.min.js"></script>
+<script src="~/Content/assets/js/buttons.colVis.min.js"></script>
+<script src="~/Content/assets/js/dataTables.select.min.js"></script>
+
+
+
+<!-- ace scripts -->
+<script src="~/Content/assets/js/ace-elements.min.js"></script>
+<script src="~/Content/assets/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    jQuery(function ($) {
+        //initiate dataTables plugin
+        var myTable = $('#dynamic-table').DataTable({
+            bAutoWidth: true,
+
+            "bSort": true,
+            "bPaginate": true,
+            "iDisplayLength": 10,
+            "sPaginationType": "full_numbers"
+        });
+
+
+
+
+
+
+
+        $.fn.dataTable.Buttons.defaults.dom.container.className = 'dt-buttons btn-overlap btn-group btn-overlap';
+        new $.fn.dataTable.Buttons(myTable, {
+            buttons: [
+                {
+                    "extend": "copy",
+                    "text": "<i class='fa fa-copy bigger-110 pink'></i> <span class='hidden'>Copy to clipboard</span>",
+                    "className": "btn btn-white btn-primary btn-bold"
+                },
+                {
+                    "extend": "csv",
+                    "text": "<i class='fa fa-database bigger-110 orange'></i> <span class='hidden'>Export to CSV</span>",
+                    "className": "btn btn-white btn-primary btn-bold"
+                },
+                {
+                    "extend": "excel",
+                    "text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>Export to Excel</span>",
+                    "className": "btn btn-white btn-primary btn-bold"
+                },
+                {
+                    "extend": "pdf",
+                    "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i> <span class='hidden'>Export to PDF</span>",
+                    "className": "btn btn-white btn-primary btn-bold"
+                },
+                {
+                    "extend": "print",
+                    "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Print</span>",
+                    "className": "btn btn-white btn-primary btn-bold",
+                    autoPrint: false,
+                    message: 'This print was produced using the Print button for DataTables'
+                }
+            ]
+        });
+        myTable.buttons().container().appendTo($('.tableTools-container'));
+    });
+</script>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Hotel_Management_System.Models.Room_Reservation>
+@{
+    ViewBag.Title = "listOfRoom_Reservation";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="page-content">
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="simple-table" class="table  table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservation.Reservation_members)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Room.Room_no)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservation.Reservation_members)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.Room_no)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Room_Res_Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Room_Res_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Room_Res_Id })
+            </td>
+        </tr>
+    }
+</tbody>
+</table>
+</div>

@@ -1,0 +1,255 @@
+﻿@model Hotel_Management_System.Models.Reservation
+
+@{
+
+    ViewBag.Title = "addReservation_Paid";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+<style>
+.dl-horizontal dt{
+text-align:left;
+}
+.dl-horizontal dd{
+text-align:left;
+}
+</style>
+<div class="main-content-inner page-content">
+    <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="#">Home</a>
+            </li>
+            <li class="active">Dashboard</li>
+        </ul><!-- /.breadcrumb -->
+
+    </div>
+    <div class="page-header">
+        <h1>
+            Reservation
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Detail of Reservation
+            </small>
+            @if (Model.Reservation_id == ViewBag.deactiveReservation)
+            {
+            <a class="btn btn-info pull-right" href="@Url.Action("deActiveReservation", "Reservation", new { id = Model.Reservation_id })" disabled>Deactive Reservation</a>
+            }
+            else
+            {
+            <a class="btn btn-info pull-right" href="@Url.Action("deActiveReservation", "Reservation", new { id = Model.Reservation_id })">Deactive Reservation</a>
+            }
+        </h1>
+
+    </div><!-- /.page-header -->
+    <dl class="dl-horizontal">
+        <dt>
+            Customer Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_id)
+        </dd>
+        <br />
+        <dt>
+            No Of Members
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation_members)
+        </dd>
+        <br />
+        <dt>
+            Reservation From
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation_from)
+        </dd>
+        <br />
+        <dt>
+            Reservation To
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation_to)
+        </dd>
+        <br />
+        <dt>
+            Room Rent
+        </dt>
+
+        <dd>
+            @ViewBag.roomRent
+        </dd>
+        <br />
+        <dt>
+            Item Purchased Amount
+        </dt>
+
+        <dd>
+            @ViewBag.itemPurchasedPrice
+        </dd>
+        <br />
+        <dt>
+            Total Amount
+        </dt>
+
+        <dd>
+            @{
+                double a = ViewBag.roomRent;
+                double b = ViewBag.itemPurchasedPrice;
+                double c = a + b;
+            } 
+            @c
+        </dd>
+
+    </dl>
+    <div class="page-header">
+        <h1>
+            Payment
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                 Add and Manage payements
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="page-content">
+        <div class="row">
+
+                <form action="@Url.Action("addReservation_Paid", "Reservation")" method="post">
+                <div class="form-horizontal">
+                    <h4>Reservation_Paid</h4>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-sm-3 no-padding-right">
+                            <label class="control-label">Paid Amount</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="col-xs-10 col-sm-5" onchange="amountCheck()" id="amount" type="text" name="Reservation_Paid_Amount" required /> 
+                            <p class="col-xs-10 col-sm-5"><strong>Total:</strong>@c</p>
+                            
+                            <input type="hidden" id="total" value="@c"/>
+                        </div>
+                        <div class="col-md-offset-3 col-sm-9">
+                        <p class="text-danger" id="error"></p>
+                        </div>
+                </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 no-padding-right">
+                            <label class="control-label">Payment Date</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="col-xs-10 col-sm-5" type="date" name="Reservation_Remainings" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="Reservation_Id" value="@ViewBag.Reservation_id"/>
+                    </div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            @if (Model.Reservation_id == ViewBag.deactiveReservation)
+                            {
+                            <button class="btn btn-info" type="submit" disabled>
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Create
+                            </button>
+                            }
+                            else
+                            {
+                            <button class="btn btn-info" type="submit" id="sub">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Create
+                            </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        <div class="page-header">
+            <h1>
+                Purchase Items
+                <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Add &amp; Manage Items
+                </small>
+            </h1>
+
+
+        </div><!-- /.page-header -->
+        <table id="simple-table" class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        Reservation ID
+                    </th>
+                    <th>
+                        Paid Amount
+                    </th>
+                    <th>
+                        Payment Date
+                    </th>
+                    <th> Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            @if (ViewBag.paidList == null)
+            {
+            <p></p>
+            }
+            else
+            {
+                foreach (var item in ViewBag.paidList)
+                {
+
+            <tr>
+                <td>
+                    @item.Reservation_Id
+                </td>
+                <td>
+                    @item.Reservation_Paid_Amount
+                </td>
+                <td>
+                    @item.Reservation_Paid_Date
+                </td>
+
+                <td>
+                    <a href="@Url.Action("detailOfReservation_Paid", new { id = item.Reservation_Id })" class="blue"><i class="ace-icon fa fa-search-plus bigger-130"></i></a> |
+                    <a href="@Url.Action("editReservation_Paid", new { id = item.Reservation_Id })" class="green"><i class="ace-icon fa fa-pencil bigger-130"></i></a>
+            </tr>
+                }
+            }
+            </tbody>
+        </table>
+        <div class="col-xs-12">
+            <div class="pull-right" >
+                <h4>Due Amount: <small><b class="text-danger">@{
+                    double x = ViewBag.paid;
+                    double y = c - x;
+                } @y</b></small></h4>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="pull-right">
+                <h4>Paid Amount: <small><b>@ViewBag.paid</b></small></h4>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function amountCheck() {
+            var a = Number(document.getElementById("total").value);
+            var b = Number(document.getElementById("amount").value);
+            
+            if (b > a) {
+                document.getElementById("error").innerHTML = "You can not enter amount greater than " + a;
+                document.getElementById("sub").setAttribute("disabled","disabled");
+            }
+            else {
+                document.getElementById("error").innerHTML = " ";
+                document.getElementById("sub").removeAttribute("disabled", "disabled");
+            }
+        }
+    </script>

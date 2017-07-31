@@ -1,0 +1,585 @@
+﻿@model Hotel_Management_System.Models.Reservation
+
+@{
+    ViewBag.Title = "detailOfReservation";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+@using Hotel_Management_System.Models;
+<style>
+    .dl-horizontal dt{
+    text-align:left;
+    }
+</style>
+<div class="page-content">
+    <h2>Detail Of Reservation</h2>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h1>
+                    Reservation
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Detail of Reservation
+                    </small>
+                    
+                    <a class="btn btn-info pull-right" href="@Url.Action("addReservation_Paid","Reservation",new {id=ViewBag.Reserve_id })">Billing</a>
+                    
+
+                </h1>
+
+
+            </div><!-- /.page-header -->
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Reservation_from)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Reservation_from)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Reservation_to)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Reservation_to)
+                </dd>
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Reservation_members)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Reservation_members)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Customer.Customer_name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Customer.Customer_name)
+                </dd>
+
+            </dl>
+        </div>
+
+    </div>
+</div>
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            Reserve Room
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Add &amp; Manage Rooms
+            </small>
+                @if (ViewBag.Reserve_id != ViewBag.deactiveReservation)
+                  {
+                <a class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal">Add Room</a>
+                }
+                else
+                {
+                <a class="btn btn-info pull-right " data-toggle="modal" data-target="#myModal" disabled>Add Room</a>
+                }
+        </h1>
+
+
+    </div><!-- /.page-header -->
+    <table id="simple-table" class="table  table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Reservation ID
+                </th>
+                <th>
+                    Room No
+                </th>
+                <th>
+                    Reserve From
+                </th>
+                <th>
+                    Reserve To
+                </th>
+                <th>
+                    Room Rent
+                </th>
+                <th> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.List)
+            {
+            <tr>
+                <td>
+                    @item.Reservation_id
+                </td>
+                <td>
+                    @item.Room_id
+                </td>
+                <td>
+                    @item.Reserve_From
+                </td>
+                <td>
+                    @item.Reserve_To
+                </td>
+                <td>
+                    @item.Room_Rent
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "editRoom_Reservation", new { id = item.Room_Res_Id }) |
+                    @Html.ActionLink("Details", "DetailOfRoom_Reservation", new { id = item.Room_Res_Id })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div class="col-xs-12">
+        <div class="pull-right">
+            <h4>Room Rent: <small><b>@ViewBag.rent</b></small></h4>
+        </div>
+    </div>
+    <div class="page-header">
+        <h1>
+            Complimentory Items
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Add &amp; Manage Items
+            </small>
+                @if (ViewBag.Reserve_id != ViewBag.deactiveReservation)
+                {
+            <a class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal2">Complimentary Item</a>
+                }
+                else
+                {
+                <a class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal2" disabled>Complimentary Item</a>
+                }
+        </h1>
+
+
+    </div><!-- /.page-header -->
+    @if (ViewBag.rciQ != null)
+    {
+
+    <div class="alert alert-danger" role="alert">
+        <strong>Oh snap!</strong> @ViewBag.rcItemMessage
+    </div>
+    }
+    @if (ViewBag.iQuantity != null)
+    {
+
+    <div class="alert alert-danger" role="alert">
+        <strong>Oh snap!</strong> @ViewBag.iMessage
+    </div>
+    }
+    <table id="simple-table" class="table  table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Reservation ID
+                </th>
+                <th>
+                    Item Name
+                </th>
+                <th>
+                    Item Quantity
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Room_Category_Item_Reservation item in ViewBag.roomCategoryItemList)
+            {
+
+            <tr>
+                <td>
+                    @item.Reservation_Id
+                </td>
+                <td>
+                    @item.Room_Category_Item.Item.Item_Name
+                </td>
+                <td>
+                    @item.Item_Quantity
+                </td>
+                <td>
+                    @item.Reservation_Date
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Edit", "editRoom_Category_Item_Reservation", new { id = item.RCI_Reservation_Id }) |
+                    @Html.ActionLink("Details", "detailOfeditRoom_Category_Item_Reservation", new { id = item.RCI_Reservation_Id })
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <div class="page-header">
+        <h1>
+            Purchase Items
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Add &amp; Manage Items
+            </small>
+                @if (ViewBag.Reserve_id != ViewBag.deactiveReservation)
+                {
+            <a class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal1">Purchase Item</a>
+                }
+                else
+                {
+                <a class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal1" disabled>Purchase Item</a>
+                }
+        </h1>
+
+
+    </div><!-- /.page-header -->
+    @if (ViewBag.quantity != null)
+    {
+
+    <div class="alert alert-danger" role="alert">
+        <strong>Oh snap!</strong> @ViewBag.itemMessage
+    </div>
+    }
+    <table id="simple-table" class="table  table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Reservation ID
+                </th>
+                <th>
+                    Item Name
+                </th>
+                <th>
+                    Item Quantity
+                </th>
+                <th>
+                    Item Price
+                </th>
+                <th>
+                    Sub Total
+                </th>
+                <th> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Item_Reservation_Purchased item in ViewBag.itemList)
+            {
+            <tr>
+                <td>
+                    @item.Reservation_Id
+                </td>
+                <td>
+                    @item.Item.Item_Name
+                </td>
+                <td>
+                    @item.Item_Quantity
+                </td>
+                <td>
+                    @item.Item_Res_Purchased_Price
+                </td>
+                <td>
+                    @item.Sub_Total
+                </td>
+                <td>
+                    <a href="@Url.Action("DetailOfItem_Reservation_Purchased","Item", new { id = item.Reservation_Id })" class="blue"><i class="ace-icon fa fa-search-plus bigger-130"></i></a> |
+                    <a href="@Url.Action("editItem_Reservation_Purchased","Item" ,new { id = item.Reservation_Id })" class="green"><i class="ace-icon fa fa-pencil bigger-130"></i></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div class="col-xs-12">
+        <div class="pull-right">
+            <h4>Sub-Total: <small><b>@ViewBag.subTotal</b></small></h4>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <form class="form-horizontal" method="post" action="@Url.Action("addRoom_Reservation","Reservation")">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Add Room</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input class="col-xs-10 col-sm-5" type="hidden" name="Reservation_Id" value="@ViewBag.Reserve_id" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3 no-padding-right">
+                                    <label class="control-label">Room ID</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <select  onchange="getval(this)" id="roomID" required class="col-xs-10 col-sm-5">
+                                       @{
+                                           List<Room> list = ViewBag.Room_id;
+                                           if (list.Count <= 0)
+                                           {
+
+                                        <option value="-1" disabled selected class="text-danger"> No room available</option>
+                                           }
+                                           else
+                                           {
+                                        <option selected disabled value="" class="active">Select a room number</option>
+
+                                               foreach (var item in list)
+                                               {
+                                            <option value="@item.Room_id,@item.Room_Rent">@item.Room_no</option>
+
+                                               }
+                                           }
+                                    }
+
+                                    </select>
+                                    <input type="text" hidden id="Room_id" name="Room_id" class="col-xs-10 col-sm-5" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3 no-padding-right">
+                                    <label class="control-label">Reserve From</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input class="col-xs-10 col-sm-5" id="first" onchange="dateCheck()" type="date" name="Reserve_From" required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3 no-padding-right">
+                                    <label class="control-label">Reserve To</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input class="col-xs-10 col-sm-5" id="second" onchange="calculateDays(); dateCheck();" type="date" name="Reserve_To" required />
+                                </div>
+                                <div class="col-sm-offset-3 col-sm-9">
+                                <p class="text-danger" id="error"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3 no-padding-right">
+                                    <label class="control-label">Room Rent</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="hidden" id="roomRent" value=""/>
+                                    <input class="col-xs-10 col-sm-5" id="rent" type="text" name="Room_Rent" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" id="sub" class="btn btn-primary">Reserve Room</button>
+
+                    </div>
+
+                </div>
+                </div>
+        </form>
+    </div>
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="form-horizontal" method="post" action="@Url.Action("addItem_Reservation_Pusrchased","Item")">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Add Item</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <div class="col-sm-3 no-padding-right">
+                                        <label class="control-label">Item Name</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select name="Item_Id" required class="col-xs-10 col-sm-5">
+                                            @foreach (Item item in ViewBag.Item_id)
+                                            {
+                                            <option value="@item.Item_Id">@item.Item_Name</option>
+
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3 no-padding-right">
+                                        <label class="control-label">Item Quantity</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input class="col-xs-10 col-sm-5 " id="quantity" type="number" name="Item_Quantity" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3 no-padding-right">
+                                        <label class="control-label">Item Price</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input class="col-xs-10 col-sm-5 " onchange="GettingSubTotal()" id="price" type="number" name="Item_Res_Purchased_Price" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input class="col-xs-10 col-sm-5" type="hidden" name="Reservation_Id" value="@ViewBag.Reserve_id" />
+
+                                </div>
+
+                                <div class="form-group">
+                                    <input class="col-xs-10 col-sm-5 " id="subTotal" type="hidden" name="Sub_Total" />
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="form-horizontal" method="post" action="@Url.Action("addRoom_Category_Item_Reservation","Room_Category")">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Add Item</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <div class="col-sm-3 no-padding-right">
+                                        <label class="control-label">Room No</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select onchange="test()" id="roomId"  required class="col-xs-10 col-sm-5">
+                                        <option value="" selected="selected" disabled>Please Select a Room</option>
+                                             @foreach (Room_Reservation item in ViewBag.roomReservedList)
+                                            {
+                                            <option value="@item.Room_id">@item.Room.Room_no</option>
+
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3 no-padding-right">
+                                        <label class="control-label">Item Name</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select  name="RC_Item_Id" id="rcId" required class="col-xs-10 col-sm-5">
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3 no-padding-right">
+                                        <label class="control-label">Item Quantity</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input class="col-xs-10 col-sm-5" type="text" name="Item_Quantity" required />
+                                        <input class="col-xs-10 col-sm-5" type="hidden" name="RCI_Reservation_Price" required  value="0"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input class="col-xs-10 col-sm-5" type="hidden" name="Reservation_Id" value="@ViewBag.Reserve_id" />
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function GettingSubTotal() {
+        //$('#subTotal').val($("#quantity")[0].value * $("#price").val());
+        var a = document.getElementById("quantity").value;
+        var b = document.getElementById("price").value;
+        var c = a * b;
+        document.getElementById("subTotal").value = c;
+    }
+    function getval(select) {
+        var a = select.value.split(",");
+        document.getElementById("Room_id").value = a[0];
+        document.getElementById("roomRent").value = a[1];
+    }
+    function dateCheck() {
+        var to = document.getElementById("first").value;
+        var toDate = new Date(to).getTime();
+        var from = document.getElementById("second").value;
+        var fromDate = new Date(from).getTime();
+        if (toDate == null || fromDate == null) {
+            document.getElementById("sub").removeAttribute("disabled", "disabled");
+            document.getElementById("error").innerHTML = " ";
+        }
+        else {
+            if (fromDate >= toDate) {
+                document.getElementById("sub").removeAttribute("disabled", "disabled");
+                document.getElementById("error").innerHTML = " ";
+            }
+            else {
+                document.getElementById("sub").setAttribute("disabled", "disabled");
+                document.getElementById("error").innerHTML = "Please enter valid date!";
+            }
+        }
+    }
+    function calculateDays() {
+        var a = document.getElementById("roomRent").value;
+        var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        var firstDate = document.getElementById("first").value;
+        var secondDate = document.getElementById("second").value;
+        var b = new Date(firstDate).getTime();
+        var c = new Date(secondDate).getTime();
+        var diffDays = Math.round(Math.abs((b - c) / (oneDay)))+1;
+        var Days = a * diffDays;
+        document.getElementById("rent").value = Days;
+    }
+   
+    function test() {
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: '@Url.Action("getListofRoomCategory", "Reservation")',
+            contentType: "application/json; charset=utf-8",
+            data: { roomId: parseInt($('#roomId').val()) },
+            success: function (response) {
+                var $el = $("#rcId");
+                $el.empty(); // remove old options
+                $el.append($("<option selected></option>")
+                    .attr("value", '').text('Please Select'));
+                $.each(response, function (value, key) {
+                    $el.append($("<option></option>")
+                        .attr("value", key.RC_Item_Id).text(key.Item_Id))
+                });
+            },
+            error: function (response) { alert(response); }
+
+        });
+
+    }
+</script>

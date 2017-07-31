@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Hotel_Management_System.Models.Room>
+
+@{
+    ViewBag.Title = "listOfRoom";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+<div class="page-content">
+    <h2>List Of Rooms</h2>
+    <hr />
+    <p>
+        @Html.ActionLink("Create New", "addRoom")
+    </p>
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Room_no)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Room_type)
+                </th>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.Room_status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Department.department_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Floor.Floor_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Room_Category.Category_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Room_Category.Room_Rent)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room_no)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room_type)
+                </td>
+                <td>
+                    @if (item.Room_status == "Active")
+                {
+                <span class="badge badge-danger">@Html.DisplayFor(modelItem => item.Room_status)</span>
+                    }
+                    else
+                    {
+                    <span class="badge badge-success">@Html.DisplayFor(modelItem => item.Room_status)</span>
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.department_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Floor.Floor_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room_Category.Category_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room_Category.Room_Rent)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "editRoom", new { id = item.Room_id }) |
+                    @Html.ActionLink("Details", "DetailOfRoom", new { id = item.Room_id }) |
+                    @Html.ActionLink("Delete", "removeRoom", new { id = item.Room_id })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

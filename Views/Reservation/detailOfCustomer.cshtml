@@ -1,0 +1,83 @@
+﻿@model Hotel_Management_System.Models.Customer
+
+@{
+    ViewBag.Title = "detailOfCustomer";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>detailOfCustomer</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer_cnic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_cnic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer_city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_city)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer_country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer_nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer_Profession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer_Profession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Employee_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Employee_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "editCustomer", new { id = Model.Customer_id }) |
+    @Html.ActionLink("Back to List", "listOfCustomer")
+</p>

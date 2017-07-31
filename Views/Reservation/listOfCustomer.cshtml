@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Hotel_Management_System.Models.Customer>
+
+@{
+    ViewBag.Title = "listOfCustomer";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>listOfCustomer</h2>
+
+<p>
+    @Html.ActionLink("Create New", "addCustomer")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_cnic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_nationality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_Profession)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.Employee_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_cnic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_nationality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_Profession)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.Employee_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "editCustomer", new { id=item.Customer_id }) |
+            @Html.ActionLink("Details", "detailOfCustomer", new { id=item.Customer_id }) |
+            @Html.ActionLink("Delete", "removeCustomer", new { id=item.Customer_id })
+        </td>
+    </tr>
+}
+
+</table>
