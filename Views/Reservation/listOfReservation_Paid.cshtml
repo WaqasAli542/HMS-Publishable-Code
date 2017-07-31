@@ -19,7 +19,7 @@
             @Html.DisplayNameFor(model => model.Reservation_Paid_Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Reservation.Reservation_members)
+            @Html.DisplayNameFor(model => model.Reservation.Reservation_id
         </th>
         <th></th>
     </tr>
@@ -33,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.Reservation_Paid_Date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Reservation.Reservation_members)
+            @Html.DisplayFor(modelItem => item.Reservation.Reservation_id)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Reservation_Paid_Id }) |
