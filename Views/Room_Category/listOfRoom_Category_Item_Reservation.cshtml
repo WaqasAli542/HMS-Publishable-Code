@@ -12,35 +12,27 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RCI_Reservation_Name)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.RCI_Reservation_Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Reservation.Reservation_members)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Room_Category_Item.RC_Item_Name)
-        </th>
+        
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RCI_Reservation_Name)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.RCI_Reservation_Price)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Reservation.Reservation_members)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Room_Category_Item.RC_Item_Name)
-        </td>
+        
         <td>
             @Html.ActionLink("Edit", "ditRoom_Category_Item_Reservation", new { id=item.RCI_Reservation_Id }) |
             @Html.ActionLink("Details", "detailOfRoom_Category_Item_Reservation", new { id=item.RCI_Reservation_Id }) |
