@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Reservation_Paid_Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Reservation_Paid_Date, new { htmlAttributes = new { @class = "form-control",type="date",, required = "required" } })
+                @Html.EditorFor(model => model.Reservation_Paid_Date, new { htmlAttributes = new { @class = "form-control",type="date", required = "required" } })
                 @Html.ValidationMessageFor(model => model.Reservation_Paid_Date, "", new { @class = "text-danger" })
             </div>
         </div>
