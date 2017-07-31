@@ -36,13 +36,7 @@
                     <h4>Item_Reservation_Purchased</h4>
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Item_Res_Purchased_Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Item_Res_Purchased_Name, new { htmlAttributes = new { @class = "form-control",required="required" } })
-                            @Html.ValidationMessageFor(model => model.Item_Res_Purchased_Name, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                    
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Item_Res_Purchased_Price, htmlAttributes: new { @class = "control-label col-md-2" })
