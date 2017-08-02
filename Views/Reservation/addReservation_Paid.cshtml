@@ -4,11 +4,6 @@
 
     ViewBag.Title = "addReservation_Paid";
     Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
-    double a = ViewBag.roomRent;
-    double b = ViewBag.itemPurchasedPrice;
-    double c = a + b;
-    double x = ViewBag.paid;
-    double y = c - x;
 }
 <style>
 .dl-horizontal dt{
@@ -35,17 +30,10 @@ text-align:left;
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Detail of Reservation
-            </small> 
+            </small>
             @if (Model.Reservation_id == ViewBag.deactiveReservation)
             {
-            
             <a class="btn btn-info pull-right" href="@Url.Action("deActiveReservation", "Reservation", new { id = Model.Reservation_id })" disabled>Deactive Reservation</a>
-            
-            }
-            else if (y != 0)
-            {
-            <a class="btn btn-info pull-right" href="@Url.Action("deActiveReservation", "Reservation", new { id = Model.Reservation_id })" disabled>Deactive Reservation</a>
-            <p class="text-danger pull-right">You can not de-activate untill due amount is not clear  &nbsp;&nbsp;</p>
             }
             else
             {
@@ -108,6 +96,11 @@ text-align:left;
         </dt>
 
         <dd>
+            @{
+                double a = ViewBag.roomRent;
+                double b = ViewBag.itemPurchasedPrice;
+                double c = a + b;
+            } 
             @c
         </dd>
 
@@ -232,7 +225,10 @@ text-align:left;
         </table>
         <div class="col-xs-12">
             <div class="pull-right" >
-                <h4>Due Amount: <small><b class="text-danger"> @y</b></small></h4>
+                <h4>Due Amount: <small><b class="text-danger">@{
+                    double x = ViewBag.paid;
+                    double y = c - x;
+                } @y</b></small></h4>
             </div>
         </div>
         <div class="col-xs-12">
